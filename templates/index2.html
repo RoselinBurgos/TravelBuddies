@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Travel Dashboard</title>
+  </head>
+
+  <style>
+
+    .name
+    {
+      color: white;
+      margin-left:25px;
+    }
+
+    img
+    {
+        margin-left: 40px;
+    }
+
+    body
+    {
+      
+      background-image: url({{ url_for('static', filename='back.jpg') }});
+      background-repeat: no-repeat;
+      
+    }
+
+    .ptop
+    {
+      color: white;
+
+    }
+
+    .rightside
+    {
+      display:block;
+      width: 70%;
+      height: 400px;
+      padding-left: 40px;
+      margin-top: 50px;
+   
+      
+    }
+
+    .leftside
+    {
+      display: inline-block;
+      width: 70%;
+      height: 400px;
+      padding-left: 40px;
+      padding-top: 25px;
+      display:block;
+    }
+
+    .rightsend
+    {
+      width: 300px;
+      height: 100px;
+    }
+
+    .little
+    {
+      margin-top: 15px;
+    }
+
+
+
+
+  </style>
+
+
+
+  <body>
+      <nav class="navbar navbar-dark bg-dark">
+        <h4 class ="name">Welcome {{session['first_name'].title()}}!</h4>
+          <a class="navbar-brand" href="#">
+            <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+          </a>
+
+          <div class="right_align_nav">
+              <span class="navbar-text text-white ml-auto">
+                  </span>
+              <a href="/addtrip">Add A Trip</a>
+              <a href="/logout"><button class="btn btn-outline-light ml-3" type="button">logout</button></a>
+          </div>
+
+   
+          
+          
+      </nav>
+      <img class="little" src="{{url_for('static', filename='littlep.png')}}" />
+
+      <div class = "leftside">
+
+        <h4>Your Trip Schedules</h4>
+
+        <br>
+            <table class="table table-striped">
+           
+                <thead>
+                  <tr>
+                    <th scope="col">Description</th>
+                    <th scope="col">Travel Start Date</th>
+                    <th scope="col">Travel End Date</th>
+                    <th scope="col">Plan</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for travel in traveler %}
+                    <tr>                            
+                     <td><a href='/view/{{travel.id}}'>{{travel.destination}}</a></td>
+                      <td>{{travel.start_date}}</td>
+                      <td>{{travel.end_date}}</td>
+                      <td>{{travel.description}}</td>
+                      <td><a href ="/delete_message/{{travel['id']}}"><button class="btn btn-outline-dark ml-3" type="button">Delete</button></a> </td>
+
+                    </tr>
+                  {% endfor %}
+
+                  {% for joined in my_joined_trips %}
+                  <tr>                            
+                   <td><a href='/view/{{joined.travel_id}}'>{{joined.destination}}</a></td>
+                    <td>{{joined.start_date}}</td>
+                    <td>{{joined.end_date}}</td>
+                    <td>{{joined.description}}</td>
+                    <td><a href ="/remove/{{joined.travel_id}}"><button class="btn btn-outline-dark ml-3" type="button">Cancel</button></a> </td>
+                  </tr>
+                {% endfor %}
+
+                </tbody>
+            
+              </table>
+
+      </div>
+            
+      <div class = "rightside">
+
+          <h4><b>Other User's Travel Plan</b></h4>
+          <br>
+              <table class="table table-striped">
+                  <thead>
+                   
+                    <tr>
+                  
+                      <th scope="col">Destination</th>
+                      <th scope="col">Travel Start Date</th>
+                      <th scope="col">Travel End Date</th>
+                      <th scope="col">Do You want to Join?</th>
+                  
+                    </tr>
+                
+                  </thead>
+                  <tbody>
+                    {% for other in other_trips%}
+                    <tr>
+                      <td scope="row"><a href='/view/{{other.id}}'>{{other.destination}}</a></td>
+                      <td scope="row">{{other.start_date}}</td>
+                      <td scope="row">{{other.end_date}}</td>
+                      <td><a href ="/join/{{other.id}}"><button class="btn btn-outline-dark ml-3" type="button">Join</button></a> </td>
+                    </tr>
+
+                    {% endfor %}
+
+                  </tbody>
+                </table> 
+  
+        </div>
+
+        
+
+
+
+      </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

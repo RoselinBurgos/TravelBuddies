@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Travel Destination</title>
+  </head>
+
+  <style>
+
+    body
+    {
+      
+      background-image: url({{ url_for('static', filename='back.jpg') }});
+      background-repeat: no-repeat;
+      
+    }
+
+      .leftside
+      {
+          margin-top: 25px;
+          margin-left: 55px;
+      }
+
+      .header
+      {
+        margin-top: 25px;
+        margin-left: 55px;
+
+      }
+
+
+      .bottomsection
+      {
+          margin-top: 25px;
+      }
+
+    .logo
+    {
+        margin-top: 15px;
+        margin-left: 40px;
+    }
+
+    .card
+    {
+        margin-top: 15px;
+        margin-left: 40px;
+    }
+
+
+
+
+  </style>
+
+
+
+  <body>
+      <nav class="navbar navbar-dark bg-dark">
+          <a class="navbar-brand" href="#">
+            <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+         
+          </a>
+          <div class="right_align_nav">
+              <span class="navbar-text text-white ml-auto">
+                  </span>
+              <a href="/travels">Back</a>
+              <a href="/logout"><button class="btn btn-outline-light ml-3" type="button">logout</button></a>
+          </div>
+          
+      </nav>
+        <div class ="logo">
+            <img src="{{url_for('static', filename='littlep.png')}}" />
+        </div>
+
+        <div class="card" style="width: 25rem;">
+            <div class="card-header">
+              <h3><b>Trip to {{travel_inf[0]['destination']}} </b></h3>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"> <b>Planned by: {{travel_inf[0]['first_name']}} {{travel_inf[0]['last_name']}}</b></li>
+              <li class="list-group-item"> <b>Description: {{travel_inf[0]['description']}} </b></li>
+              <li class="list-group-item"><b>Travel Date From: {{travel_inf[0]['start_date']}}</b></li>
+              <li class="list-group-item"><b>Travel Date To: {{travel_inf[0]['end_date']}}</b></li>
+            </ul>
+        </div>
+
+
+      <div class ="center">
+        <div class ="leftside">
+                <h4> Other Users Joining the Trip: </h4>
+                    {% for others in others_on_trip %}
+                    <h5>{{others.first_name}} {{others.last_name}}</h5>
+                    {% endfor %}
+
+                
+        </div>
+
+      </div>
+
+
+
+
+        
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

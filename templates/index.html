@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Registration Form</title>
+
+    <style>
+
+    body
+    {
+      
+      background-image: url({{ url_for('static', filename='back.jpg') }});
+      background-repeat: no-repeat;
+      
+    }
+
+    .header
+    {
+        width: 400px;
+        height: 200px;
+        display: inline-block;
+    }
+
+    .text
+    {
+        margin-left: 2px;
+        vertical-align: top;
+    }
+
+
+
+    /* img
+    {
+        margin-left: 50px;
+    } */
+
+
+
+    .top
+    {
+        width: 1100px;
+        height: 550px;
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    .regbox
+    {
+        padding-left: 15px;
+        font-weight: bold;
+        margin-top: 15px;
+        margin-left: 50px;
+        width: 300px;
+        height: 500px;
+        display: inline-block;
+
+    }
+
+
+    .h3top
+    {
+        margin-left: 10px;
+    }
+
+    .alerts
+    {
+        height: 3px;
+        font-weight: bold;
+        width: 400px;
+        color: red;
+    }
+
+    .loginblock
+    {
+        width: 300px;
+        height: 300px;
+        display: inline-block;
+        vertical-align: top;
+        font-weight: bold;
+        margin-top: 15px;
+    }
+
+    .alertsok
+    {
+        height: 5px;
+        font-weight: bold;
+        width: 200px;
+        color:green;
+        margin-left: 410px;
+
+    }
+
+    h2
+    {
+        margin-top: 10px;
+    }
+
+    .rightside
+    {
+        display: inline-block;
+        margin-left: 20px;
+        margin-top: 15px;
+        width: 500px;  
+        border-style: dashed;   
+    }
+
+    .words
+    {
+        font-weight: bold;
+        font-size: 25px;
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+
+    .peg
+    {
+        margin-top: 15px;
+        margin-left: 40px;
+    }
+
+
+    </style>
+  </head>
+  <body>
+        <nav class="navbar navbar-dark bg-dark">
+                <a class="navbar-brand" href="#">
+                  <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                </a>
+                
+            </nav>
+
+
+
+        <div class = "top">
+            
+            <div class ="regbox">
+                <h3> Register</h3> 
+            
+                <form action='/result' method='post' name="theform">
+                    <div class ="innerbox">
+                        Email:<br>
+                        <input class="form-control col-10" type='email' name='email'> 
+                        <br>
+    
+                        First Name: <br>
+                        <input class="form-control col-10" type='text' name ='first_name'>
+                        <br>
+                        
+                        Last Name:<br> 
+                        <input class="form-control col-10" type ='text' name ='last_name'>
+                        <br>
+                        
+                        Password:<br>
+                         <input class="form-control col-10" type ='password' name='password'>
+                        <br>
+                        
+                        Confirm Password:<br> 
+                        <input class="form-control col-10" type ='password' name='c_password'>
+                        <br>
+                        
+                        <button type="submit" class="btn btn-outline-secondary" type ="submit" value="submit">Submit</button>
+                    </div>
+
+                    <div class ="messagebox">
+                    </div>
+                </form>
+            </div>
+
+            <div class = "header">
+               
+                <div class="text">
+                {% with messages = get_flashed_messages(category_filter=['wrong'])%}
+                    {% if messages %}
+                      {% for message in messages %}
+                        <p class ="alerts">{{message}}</p>
+                      {% endfor %}
+                    {% endif %}
+                {% endwith %}
+    
+                {% with messages = get_flashed_messages(category_filter=['okgreen']) %}
+                {% if messages %}
+                  {% for message in messages %}
+                    <p class ="alertsok">{{message}}</p>
+                  {% endfor %}
+                {% endif %}
+                {% endwith %}
+                </div>
+            </div>
+           
+
+            <div class="loginblock">
+
+                <h3> Login</h3>
+
+                <form action='/login' method='post' name="theform">
+                    <div class ="innerbox">
+                        Email:<br>
+                        <input class="form-control col-10" type='email' name='email'> 
+                        <br>
+                        <br>
+                        Password: <br>
+                        <input class="form-control col-10" type='password' name ='password'>
+                        <br>
+                        <br>
+                        <button type="submit" class="btn btn-outline-secondary" type ="submit" value="submit">Login</button>
+                    </div>
+                </form>
+
+            </div>
+
+
+        </div>
+
+        <div class="rightside">
+                <img class="peg" src="{{url_for('static', filename='buddies.png')}}" />
+                <div class="words">
+                    <br>
+                    <p>Going on a journey with awesome travel buddies means you will always have someone to laugh with, to talk to, and to share those magical moments with! Create trips where people can join you or join other people on their trips. With "Travel Buddies" you can erase “boredom” and “loneliness” from your adventures!</p>
+                </div>
+
+        </div>
+    
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    
+        
+  </body>
+</html>
